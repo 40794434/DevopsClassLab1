@@ -7,3 +7,5 @@ Software Development Engine Methods
 )](https://github.com/40794434/DevopsClassLab1/blob/master/LICENSE)
 
 [![Releases](https://img.shields.io/github/release/40794434/DevopsClassLab1/all.svg?style=flat-square)](https://github.com/40794434/DevopsClassLab1/releases)
+
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/40794434/DevopsClassLab1/main.yml?branch=develop)
