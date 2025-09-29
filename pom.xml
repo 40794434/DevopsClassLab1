@@ -6,7 +6,7 @@
 
     <groupId>com.napier.sem</groupId>
     <artifactId>DevopsClassRoom1</artifactId>
-    <version>0.1.0.3</version>
+    <version>0.1.0.4</version>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
