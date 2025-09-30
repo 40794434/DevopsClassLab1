@@ -143,7 +143,14 @@ public class App {
             System.out.println(emp_string);
         }
     }
+    public Department getDepartment(String dept_name){
 
+        return null;
+    }
+    public ArrayList<Employee> getSalariesByDepartment(Department dept){
+
+        return null;
+    }
     public static void main(String[] args) {
         // Create new Application
         App a = new App();
@@ -163,6 +170,9 @@ public class App {
         // Disconnect from database
         a.disconnect();
     }
+
+
+
 }
 
 
