@@ -21,6 +21,5 @@ jobs:
         run: |
           mvn package -DskipTests
           docker compose up --abort-on-container-exit
-      - name: Copy Output
-      - run: docker container cp dbandunittesting-app-1:/tmp/reports ./ || true
+      
 
