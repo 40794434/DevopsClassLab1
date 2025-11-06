@@ -21,11 +21,13 @@ public class AppIntegrationTest {
     @Test
     void testGetEmployee() {
         Employee emp = app.getEmployee(255530);
-        System.out.print("Employee ID : " + emp.first_name);
-        assertEquals(255530, emp.emp_no, "emp_no are equal");
-        assertEquals("Ronghao", emp.first_name);
-        assertEquals("Garigliano", emp.last_name);
-
+        assertNotNull(emp, "Employee should not be null. Check DB initialization.");
+        if (emp != null) {
+            System.out.print("Employee ID : " + emp.first_name);
+            assertEquals(255530, emp.emp_no);
+            assertEquals("Ronghao", emp.first_name);
+            assertEquals("Garigliano", emp.last_name);
+        }
     }
 
 
