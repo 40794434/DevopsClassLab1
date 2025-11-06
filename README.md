@@ -13,11 +13,11 @@ Software Development Engine Methods
 
 [![codecov](https://codecov.io/gh/40794434/DevopsClassLab1/graph/badge.svg?token=W5NO2ORI5O)](https://codecov.io/gh/40794434/DevopsClassLab1)
 
-| ID            |     Name      |   Met |   Screenshot |
-|---------------|:-------------:|------:|-------------:|
-| col 3 is      | right-aligned |    $0 |   ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")           | 
-| col 2 is      |   centered    |   $12 |              |
-| zebra stripes |   are neat    |    $1 |              |
+| ID            |     Name      | Met |   Screenshot |
+|---------------|:-------------:|----:|-------------:|
+| col 3 is      | right-aligned | $50 |   ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")           | 
+| col 2 is      |   centered    | $12 |              |
+| zebra stripes |   are neat    |  $1 |              |
 
 Inline-style:
 
