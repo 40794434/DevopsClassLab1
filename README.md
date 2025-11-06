@@ -10,6 +10,9 @@ Software Development Engine Methods
 
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/40794434/DevopsClassLab1/main.yml?branch=develop)
 
+
+[![codecov](https://codecov.io/gh/40794434/DevopsClassLab1/branch/master/graph/badge.svg)](https://codecov.io/gh/40794434/DevopsClassLab1)
+
 | ID            |     Name      |   Met |   Screenshot |
 |---------------|:-------------:|------:|-------------:|
 | col 3 is      | right-aligned |    $0 |   ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")           | 
