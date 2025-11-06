@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.globalworldpopulation</groupId>
-    <artifactId>Global_World_Population</artifactId>
+    <groupId>com.napier.sem</groupId>
+    <artifactId>DevopsClassRoom1</artifactId>
     <version>0.1.0.5</version>
 
     <properties>
@@ -68,7 +68,7 @@
                     <finalName>devops</finalName>
                     <archive>
                         <manifest>
-                            <mainClass>com.globalworldpopulation.MySQL_Test</mainClass>
+                            <mainClass>org.example.App</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
