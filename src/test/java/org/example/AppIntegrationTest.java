@@ -30,7 +30,7 @@ public class AppIntegrationTest {
     void testAddEmployee()
     {
         Employee emp = new Employee();
-        emp.emp_no = 500000;
+        emp.emp_no = 500001;
         emp.first_name = "Kevin";
         emp.last_name = "Chalmers";
         app.addEmployee(emp);
