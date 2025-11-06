@@ -11,7 +11,7 @@ Software Development Engine Methods
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/40794434/DevopsClassLab1/main.yml?branch=develop)
 
 
-[![codecov](https://codecov.io/gh/40794434/DevopsClassLab1/branch/master/graph/badge.svg)](https://codecov.io/gh/40794434/DevopsClassLab1)
+[![codecov](https://codecov.io/gh/40794434/DevopsClassLab1/graph/badge.svg?token=W5NO2ORI5O)](https://codecov.io/gh/40794434/DevopsClassLab1)
 
 | ID            |     Name      |   Met |   Screenshot |
 |---------------|:-------------:|------:|-------------:|
