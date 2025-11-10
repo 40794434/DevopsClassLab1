@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class App {
-    private Connection con = null;
+    Connection con = null;
 
     /**
      * Connect to the MySQL database.
@@ -240,6 +240,7 @@ public class App {
 
         // Print salary report
         a.printSalaries(employees);
+        a.getAllSalaries();
 
         // Disconnect from database
         a.disconnect();
