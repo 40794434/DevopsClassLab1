@@ -19,6 +19,14 @@ jobs:
           distribution: 'temurin'
       - name: Unit Tests
         run: mvn -Dtest=org.example.AppTest test
+      - name: CodeCov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} 
+          files: ./target/site/jacoco/jacoco.xml
+          flags: Integration Tests # optional
+          verbose: true # optional (default = false)
+          slug: 40794434/DevopsClassLab1  
 
   IntegrationTests:
     name: Integration Tests
@@ -51,7 +59,7 @@ jobs:
           files: ./target/site/jacoco/jacoco.xml
           flags: Integration Tests # optional
           verbose: true # optional (default = false)
-          slug: padaukwai/IntegrationTestingRep
+          slug: 40794434/DevopsClassLab1
   build:
     name: Build and Start Using docker compose
     runs-on: ubuntu-24.04
