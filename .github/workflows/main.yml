@@ -42,21 +42,46 @@ jobs:
         with:
           java-version: '24'
           distribution: 'temurin'
-      - name: Integration Tests and CodeCov
+      - name: Integration Tests
         run: |
-          docker build -t database ./db 
-          docker run --name employees -dp 33060:3306 database
-          mvn -Dtest=org.example.AppIntegrationTest test          
-          docker stop employees
-          docker rm employees
-          docker image rm database
+          docker compose up -d db
+          mvn -Dtest=org.example.AppIntegrationTest test
+      - name: Shutdown
+        run: docker compose down
       - name: CodeCov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v5
         with:
-          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          #token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           directory: ./target/site/jacoco
           flags: Integration Tests # optional
           verbose: true # optional (default = false)
+
+    build:
+      name: Build Run in Docker and Deploy Release
+      runs-on: ubuntu-24.04
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            submodules: recursive
+        - name: Set up JDK 24
+          uses: actions/setup-java@v2
+          with:
+            java-version: '24'
+            distribution: 'temurin'
+        - name: Package and Run docker compose
+          run: |
+            mvn package -DskipTests
+            docker compose up --abort-on-container-exit
+        - name: Copy Output
+          run: |
+            mkdir -p reports
+            docker container cp sem-app-1:./tmp/reports/. ./reports
+        - name: Deploy
+          uses: JamesIves/github-pages-deploy-action@v4.2.5
+          with:
+            branch: reports # The branch the action should deploy to.
+            folder: reports # The folder we are copying
   build:
     name: Build and Start Using docker compose
     runs-on: ubuntu-24.04
