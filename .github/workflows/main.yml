@@ -45,12 +45,13 @@ jobs:
           docker image rm database
 
       - name: CodeCov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v4.0.1
         with:
-          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          directory: ./target/site/jacoco
+          token: ${{ secrets.CODECOV_TOKEN }} 
+          files: ./target/site/jacoco/jacoco.xml
           flags: Integration Tests # optional
           verbose: true # optional (default = false)
+          slug: padaukwai/IntegrationTestingRep
   build:
     name: Build and Start Using docker compose
     runs-on: ubuntu-24.04
