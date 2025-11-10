@@ -10,40 +10,34 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AppTest
-{
+public class AppTest {
     static App app;
 
     @BeforeAll
-    static void init()
-    {
+    static void init() {
         app = new App();
     }
 
     @Test
-    void printSalariesTestNull()
-    {
+    void printSalariesTestNull() {
         app.printSalaries(null);
     }
 
     @Test
-    void printSalariesTestEmpty()
-    {
+    void printSalariesTestEmpty() {
         ArrayList<Employee> employess = new ArrayList<Employee>();
         app.printSalaries(employess);
     }
 
     @Test
-    void printSalariesTestContainsNull()
-    {
+    void printSalariesTestContainsNull() {
         ArrayList<Employee> employess = new ArrayList<Employee>();
         employess.add(null);
         app.printSalaries(employess);
     }
 
     @Test
-    void printSalaries()
-    {
+    void printSalaries() {
         ArrayList<Employee> employees = new ArrayList<Employee>();
         Employee emp = new Employee();
         emp.emp_no = 1;

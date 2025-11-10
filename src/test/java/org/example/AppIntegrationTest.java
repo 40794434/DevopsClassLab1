@@ -17,7 +17,7 @@ public class AppIntegrationTest {
     static void init() {
         app = new App();
         System.out.println("=== INITIALIZING DATABASE CONNECTION ===");
-        app.connect("localhost:33060", 30000);
+        app.connect("mysql:3306", 30000);
         System.out.println("=== DATABASE CONNECTION COMPLETED ===");
     }
 
