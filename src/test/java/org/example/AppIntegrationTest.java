@@ -17,7 +17,7 @@ public class AppIntegrationTest {
     static void init() {
         app = new App();
         System.out.println("=== INITIALIZING DATABASE CONNECTION ===");
-        app.connect("localhost:33060", 30000);
+        app.connect();
         System.out.println("=== DATABASE CONNECTION COMPLETED ===");
     }
 
