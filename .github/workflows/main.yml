@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '24'
-          distribution: 'adopt'
+          distribution: 'temurin'
       - name: Unit Tests
         run: mvn -Dtest=org.example.AppTest test
 
@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '24'
-          distribution: 'adopt'
+          distribution: 'temurin'
       - name: Integration Tests and CodeCov
         run: |
           docker build -t database ./db 
