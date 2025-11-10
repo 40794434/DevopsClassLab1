@@ -1,9 +1,12 @@
-name: A workflow for my Hello World App
+name: A workflow for my Global World Population App
 on:
   push:
     branches:
       - master
       - develop
+
+permissions:
+  contents: write
 
 jobs:
   UnitTests:
@@ -22,14 +25,12 @@ jobs:
       - name: Unit Tests
         run: mvn -Dtest=org.example.AppTest test
       - name: CodeCov
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v5
         with:
-            token: ${{ secrets.CODECOV_TOKEN }} # now required for public repos too
-            files: ./target/site/jacoco/jacoco.xml
-            flags: Integration Tests # optional
-            verbose: true # optional (default = false)
-            slug: 40794434/DevopsClassRoom1
-
+          #token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          directory: ./target/site/jacoco
+          flags: Unit Tests # optional
+          verbose: true # optional (default = false)
 
   IntegrationTests:
     name: Integration Tests
@@ -58,34 +59,8 @@ jobs:
           flags: Integration Tests # optional
           verbose: true # optional (default = false)
 
-    build:
-      name: Build Run in Docker and Deploy Release
-      runs-on: ubuntu-24.04
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-          with:
-            submodules: recursive
-        - name: Set up JDK 24
-          uses: actions/setup-java@v2
-          with:
-            java-version: '24'
-            distribution: 'temurin'
-        - name: Package and Run docker compose
-          run: |
-            mvn package -DskipTests
-            docker compose up --abort-on-container-exit
-        - name: Copy Output
-          run: |
-            mkdir -p reports
-            docker container cp sem-app-1:./tmp/reports/. ./reports
-        - name: Deploy
-          uses: JamesIves/github-pages-deploy-action@v4.2.5
-          with:
-            branch: reports # The branch the action should deploy to.
-            folder: reports # The folder we are copying
   build:
-    name: Build and Start Using docker compose
+    name: Build Run in Docker and Deploy Release
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
@@ -101,3 +76,47 @@ jobs:
         run: |
           mvn package -DskipTests
           docker compose up --abort-on-container-exit
+      - name: Copy Output
+        run: |
+          mkdir -p reports
+          docker container cp sem-app-1:./tmp/reports/. ./reports
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: reports # The branch the action should deploy to.
+          folder: reports # The folder we are copying
+
+#  build:
+#    name: Build and Start Using docker-compose
+#    runs-on: ubuntu-24.04
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#        with:
+#          submodules: recursive
+#      - name: Set up JDK 24
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '24'
+#          distribution: 'adopt'
+#      - name: Setup network
+#        run: |
+#            docker network create --driver bridge globalworldpopulation
+#            docker pull mongo
+#            docker run -d --name mongo-dbserver --network globalworldpopulation mongo
+#      - name: Build with Maven
+#        run: mvn package
+#      - name: Run docker compose
+#        run: docker compose up --abort-on-container-exit
+#      - name: Build
+#        run: docker build -t worldpopulation .
+#      - name: Run image
+#        run: docker run --network globalworldpopulation --name devopscontainer worldpopulation
+#      - name: view logs
+#        run: docker logs devopscontainer
+#      - name: Unit Tests
+#        run: mvn -Dtest=com.globalworldpopulation.MySQL_Test_Unit_Test test
+#     - name: Package and Run docker compose
+#        run: |
+#            mvn package -DskipTests
+#            docker compose up --abort-on-container-exit
