@@ -19,6 +19,13 @@ public class AppIntegrationTest {
     }
 
     @Test
+    void testDatabaseConnection() {
+        // Test that we can connect and query the database
+        ArrayList<Employee> employees = app.getAllSalaries();
+        assertNotNull(employees, "Should be able to retrieve employees");
+        assertTrue(employees.size() > 0, "Should have at least one employee");
+    }
+    @Test
     void testGetEmployee() {
         Employee emp = app.getEmployee(255530);
         assertNotNull(emp, "Employee should not be null. Check DB initialization.");
