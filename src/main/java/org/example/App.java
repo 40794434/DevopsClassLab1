@@ -4,14 +4,12 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class App {
-    Connection con = null;
 
-    /**
-     * Connect to the MySQL database.
-     */
+    private Connection con = null;
+
+
     public void connect(String location, int delay) {
         try {
-            // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
@@ -22,16 +20,13 @@ public class App {
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
-                // Wait a bit for db to start
                 Thread.sleep(delay);
-                // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://" + location
-                                + "/employees?allowPublicKeyRetrieval=true&useSSL=false",
-                        "root", "example");
+                        + "/employees?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " +                                  Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
@@ -39,9 +34,7 @@ public class App {
         }
     }
 
-    /**
-     * Disconnect from the MySQL database.
-     */
+
     public void disconnect() {
         if (con != null) {
             try {
@@ -52,6 +45,7 @@ public class App {
             }
         }
     }
+
 
     public Employee getEmployee(int ID) {
         try {
@@ -81,24 +75,7 @@ public class App {
         }
     }
 
-    public void displayEmployee(Employee emp) {
-        if (emp != null) {
-            System.out.println(
-                    emp.emp_no + " "
-                            + emp.first_name + " "
-                            + emp.last_name + "\n"
-                            + emp.title + "\n"
-                            + "Salary:" + emp.salary + "\n"
-                            + emp.dept_name + "\n"
-                            + "Manager: " + emp.manager + "\n");
-        }
-    }
 
-    /**
-     * Gets all the current employees and salaries.
-     *
-     * @return A list of all employees and salaries, or null if there is an error.
-     */
     public ArrayList<Employee> getAllSalaries() {
         try {
             // Create an SQL statement
@@ -123,7 +100,6 @@ public class App {
             }
             return employees;
         } catch (Exception e) {
-            System.out.println("Salary error");
             System.out.println(e.getMessage());
             System.out.println("Failed to get salary details");
             return null;
@@ -184,7 +160,6 @@ public class App {
         }
     }
 
-
     /**
      * Prints a list of employees.
      *
@@ -204,22 +179,8 @@ public class App {
                 continue;
             String emp_string =
                     String.format("%-10s %-15s %-20s %-8s",
-                            emp.emp_no, emp.first_name, emp.last_name, emp.salary, emp.dept_name);
+                            emp.emp_no, emp.first_name, emp.last_name, emp.salary);
             System.out.println(emp_string);
-        }
-    }
-
-    public void addEmployee(Employee emp) {
-        try {
-            Statement stmt = con.createStatement();
-            String strUpdate =
-                    "INSERT INTO employees (emp_no, first_name, last_name, birth_date, gender, hire_date) " +
-                            "VALUES (" + emp.emp_no + ", '" + emp.first_name + "', '" + emp.last_name + "', " +
-                            "'9999-01-01', 'M', '9999-01-01')";
-            stmt.execute(strUpdate);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to add employee");
         }
     }
 
@@ -227,18 +188,21 @@ public class App {
         // Create new Application and connect to database
         App a = new App();
 
-        a.connect("localhost:33060", 30000);
+        if (args.length < 1) {
+            a.connect("localhost:33060", 30000);
+        } else {
+            a.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         Department dept = a.getDepartment("Development");
-        System.out.println(dept.toString());
         ArrayList<Employee> employees = a.getSalariesByDepartment(dept);
 
 
         // Print salary report
         a.printSalaries(employees);
-        a.getAllSalaries();
 
         // Disconnect from database
         a.disconnect();
     }
 }
+
