@@ -4,6 +4,9 @@ on:
     branches:
       - master
       - develop
+
+permissions:
+  contents: write
 jobs:
   UnitTests:
     name: Unit Tests
